@@ -4,7 +4,7 @@ var bodyParser = require('body-parser')
 var AWS=require('aws-sdk'),
     secretName = "arn:aws:secretsmanager:us-east-1:738101073940:secret:ProductionDB-giBfnN",
     secret;
-    
+
 const KEY_ID= "ASIA2XWSATAKLFEYWEEL"; 
 const SECRET_KEY="ddhrOjZb3oXSx2kQ1tKpmqvIrUxMe4SWLemZl9ez";
 const TOKEN="FwoGZXIvYXdzEBwaDL7Mycpi48t+0OUMviLAAV3JP0IQnyBBzCHW4spsM1Ys0QsScCe0gpeDSbXf7nVJ9VNOdkzm44+qCEvaxu5H/tnUfP8knv2l4UZiBEEtKmfK2AFggt7MTKFjKZdrxuIqcE7zKyqq+e185KuNEykvkKYL18xgd8N7oAycrnGTPJJTQ1kM/68wTaqM7ogn/0l2iE+HF5V+0c8kKOm9W43gkJ9DrCpL6CxeOXC2Nsfh8YGSRIH4xi9rd1wmStSKKcEeMYd/QFsYIBUF4BK7QJD0QCiNt/2RBjItNuHIygm5r4gYIvHYIdmYkX+VcI4LnLEyuRFfU1qFIuDZAGmyxSw19vVF8mWU";
@@ -76,7 +76,7 @@ app.use(bodyParser.json())
 var mysql = require('mysql');
 
 const connection = mysql.createConnection({
-  host     : 'database-1-instance-1.cgnewppeezrp.us-east-1.rds.amazonaws.com',
+  host     : 'database-b00884335-instance-1.cgnewppeezrp.us-east-1.rds.amazonaws.com',
   port     : '3306',
   user     : user,
   password : password,
@@ -94,7 +94,7 @@ connection.connect(err=>{
 
 app.post('/storestudent', async (req, res) => {
   console.log(req.body)
-  let stmt = `INSERT INTO student.students(first_name,last_name,banner) VALUES ? `
+  let stmt = `INSERT INTO students.students(first_name,last_name,banner) VALUES ? `
   let values = []
   req.body?.students.map((student) => {
     values.push([student.first_name, student.last_name, student.banner])
@@ -114,7 +114,7 @@ app.post('/storestudent', async (req, res) => {
 })
 
 app.get('/liststudents',async (req, res) => {
-  connection.query('SELECT * FROM student.students', (err, rows) => {
+  connection.query('SELECT * FROM students.students', (err, rows) => {
     if (err) {
       return res.status(400).send(err.message)
     }
