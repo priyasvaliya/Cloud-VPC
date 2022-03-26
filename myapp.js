@@ -5,9 +5,9 @@ var AWS=require('aws-sdk'),
     secretName = "arn:aws:secretsmanager:us-east-1:738101073940:secret:ProductionDB-giBfnN",
     secret;
 
-const KEY_ID= "ASIA2XWSATAKLFEYWEEL"; 
-const SECRET_KEY="ddhrOjZb3oXSx2kQ1tKpmqvIrUxMe4SWLemZl9ez";
-const TOKEN="FwoGZXIvYXdzEBwaDL7Mycpi48t+0OUMviLAAV3JP0IQnyBBzCHW4spsM1Ys0QsScCe0gpeDSbXf7nVJ9VNOdkzm44+qCEvaxu5H/tnUfP8knv2l4UZiBEEtKmfK2AFggt7MTKFjKZdrxuIqcE7zKyqq+e185KuNEykvkKYL18xgd8N7oAycrnGTPJJTQ1kM/68wTaqM7ogn/0l2iE+HF5V+0c8kKOm9W43gkJ9DrCpL6CxeOXC2Nsfh8YGSRIH4xi9rd1wmStSKKcEeMYd/QFsYIBUF4BK7QJD0QCiNt/2RBjItNuHIygm5r4gYIvHYIdmYkX+VcI4LnLEyuRFfU1qFIuDZAGmyxSw19vVF8mWU";
+const KEY_ID= "ASIA2XWSATAKD4R77G7J"; 
+const SECRET_KEY="0308dYVcBPwwUxRhLyfkAysmq8X0T5SmLVmreSuA";
+const TOKEN="FwoGZXIvYXdzECAaDIaU1pfEWQZDhfDNliLAAYSzHBGCeESfUcAYZ0zwe0rbWgSfll1hrWLGTE57/B+oVpTUxJOIwPiQaZSGpe4DXQEEh2cj+dYYdDMVqn3oNo47yDz6jhbkajBusaAjqAslMdzlBnY04OaSnAVRjS8cFAuH330npt3VKMTBBBDQM2q1M6te6cqVv4CNgP9ZAk5D2/eQH9YETqlima6+f57RKu9vSKdEVsDVzZweqj4PrBg+cqVpIzw61OTP7Bpa4SSiJNYzlQg7fwwvVFS7pwhKvyion/6RBjItmafbYLci5Np8dxVr47pdHS+Pr1HL7pkDg16KGmTmkmKyAHyS3fJXRdb4stqr";
 
 // to retrieve secret from the secret manager, code is taken from https://us-east-1.console.aws.amazon.com/secretsmanager/home?region=us-east-1#!/secret?name=ProductionDB
 
@@ -60,6 +60,8 @@ client.getSecretValue({SecretId: secretName}, function(err, data) {
    
     user=secret.DBUsername;
     password=secret.DBPassword;
+    console.log(user);
+    console.log(password);
     
 });
 
