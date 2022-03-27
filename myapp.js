@@ -58,10 +58,9 @@ client.getSecretValue({SecretId: secretName}, function(err, data) {
             decodedBinarySecret = buff.toString('ascii');
         }
     }
-   
-  
-    console.log(user);
-    console.log(password);
+    user=secret.DBUsername;
+    password=secret.DBPassword;
+   console.log(typeof secret.DBUsername);
     
 });
 
@@ -80,8 +79,8 @@ var mysql = require('mysql');
 const connection = mysql.createConnection({
   host     : 'database-b00884335-instance-1.cgnewppeezrp.us-east-1.rds.amazonaws.com',
   port     : '3306',
-  user     : secret?.DBUsername,
-  password :  secret?.DBPassword,
+  user     :  toString(user),
+  password :  toString(password),
   
 })
 
