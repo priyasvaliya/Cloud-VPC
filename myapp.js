@@ -9,6 +9,17 @@ var AWS=require('aws-sdk'),
 const KEY_ID= "ASIA2XWSATAKD4R77G7J"; 
 const SECRET_KEY="0308dYVcBPwwUxRhLyfkAysmq8X0T5SmLVmreSuA";
 const TOKEN="FwoGZXIvYXdzECAaDIaU1pfEWQZDhfDNliLAAYSzHBGCeESfUcAYZ0zwe0rbWgSfll1hrWLGTE57/B+oVpTUxJOIwPiQaZSGpe4DXQEEh2cj+dYYdDMVqn3oNo47yDz6jhbkajBusaAjqAslMdzlBnY04OaSnAVRjS8cFAuH330npt3VKMTBBBDQM2q1M6te6cqVv4CNgP9ZAk5D2/eQH9YETqlima6+f57RKu9vSKdEVsDVzZweqj4PrBg+cqVpIzw61OTP7Bpa4SSiJNYzlQg7fwwvVFS7pwhKvyion/6RBjItmafbYLci5Np8dxVr47pdHS+Pr1HL7pkDg16KGmTmkmKyAHyS3fJXRdb4stqr";
+// Constants
+const PORT = 3000
+
+// App
+const app = express()
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+
+
+var mysql = require('mysql');
+
 
 // to retrieve secret from the secret manager, code is taken from https://us-east-1.console.aws.amazon.com/secretsmanager/home?region=us-east-1#!/secret?name=ProductionDB
 
@@ -61,28 +72,18 @@ client.getSecretValue({SecretId: secretName}, function(err, data) {
     user=secret.DBUsername;
     password=secret.DBPassword;
    console.log(typeof secret.DBUsername);
+    const connection = mysql.createConnection({
+    host     : 'database-b00884335-instance-1.cgnewppeezrp.us-east-1.rds.amazonaws.com',
+    port     : '3306',
+    user     :  secret?.DBUsername,
+    password :  secret?.DBUsername,
     
-});
+  })
+    
 
 
-// Constants
-const PORT = 3000
-
-// App
-const app = express()
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
 
 
-var mysql = require('mysql');
-
-const connection = mysql.createConnection({
-  host     : 'database-b00884335-instance-1.cgnewppeezrp.us-east-1.rds.amazonaws.com',
-  port     : '3306',
-  user     :  toString(user),
-  password :  toString(password),
-  
-})
 
 connection.connect(err=>{
 
@@ -152,6 +153,7 @@ app.get('/liststudents',async (req, res) => {
     res.send(Response)
   })
 })
+});
     
 app.listen(PORT)
 console.log(`Running on ${PORT}`)
