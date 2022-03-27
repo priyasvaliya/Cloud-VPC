@@ -59,8 +59,7 @@ client.getSecretValue({SecretId: secretName}, function(err, data) {
         }
     }
    
-    user=secret.DBUsername;
-    password=secret.DBPassword;
+  
     console.log(user);
     console.log(password);
     
@@ -81,8 +80,8 @@ var mysql = require('mysql');
 const connection = mysql.createConnection({
   host     : 'database-b00884335-instance-1.cgnewppeezrp.us-east-1.rds.amazonaws.com',
   port     : '3306',
-  user     : 'admin',
-  password :  'Pr7504.sav',
+  user     : secret?.DBUsername,
+  password :  secret?.DBPassword,
   
 })
 
