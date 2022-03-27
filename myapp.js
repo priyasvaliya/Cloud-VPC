@@ -107,6 +107,7 @@ app.post('/storestudent', async (req, res) => {
 })
 
 app.get('/liststudents',async (req, res) => {
+  
   connection.query('SELECT * FROM students.students', (err, rows) => {
     if (err) {
       return res.status(400).send(err.message)
