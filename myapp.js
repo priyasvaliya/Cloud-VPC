@@ -6,9 +6,9 @@ var AWS=require('aws-sdk'),
     secretName = "arn:aws:secretsmanager:us-east-1:738101073940:secret:ProductionDB-giBfnN",
     secret;
 
-const KEY_ID= "ASIA2XWSATAKD4R77G7J"; 
-const SECRET_KEY="0308dYVcBPwwUxRhLyfkAysmq8X0T5SmLVmreSuA";
-const TOKEN="FwoGZXIvYXdzECAaDIaU1pfEWQZDhfDNliLAAYSzHBGCeESfUcAYZ0zwe0rbWgSfll1hrWLGTE57/B+oVpTUxJOIwPiQaZSGpe4DXQEEh2cj+dYYdDMVqn3oNo47yDz6jhbkajBusaAjqAslMdzlBnY04OaSnAVRjS8cFAuH330npt3VKMTBBBDQM2q1M6te6cqVv4CNgP9ZAk5D2/eQH9YETqlima6+f57RKu9vSKdEVsDVzZweqj4PrBg+cqVpIzw61OTP7Bpa4SSiJNYzlQg7fwwvVFS7pwhKvyion/6RBjItmafbYLci5Np8dxVr47pdHS+Pr1HL7pkDg16KGmTmkmKyAHyS3fJXRdb4stqr";
+const KEY_ID= "ASIA2XWSATAKLVSY6EE6"; 
+const SECRET_KEY="hEz+2gDRNuHA/rMUuP8ioMnllvnaBMR4l46FxaFO";
+const TOKEN="FwoGZXIvYXdzECQaDEKABPRUkp+zzD9NLSLAAS2Fx9OnT4hxxYh+UtcX7jSthdyXe9ElwyrKSnY18qviSLZ0K+tn4Obzh4VAIlTKcmgAcem8EOrb65zpUETAC2H37QFFqPFSh5xT0ggkvPh7gh/jZksHwNS+G2dxPvI6sBiOxfmd+foRjiRp2dZSLnukDiIMD4YcqU5WHMPH+8T5papAluMYx+AOvZTK336gVPB4+T43LU2czWsPDWTdsjM8ZnHeKJLf6a88VgzDV/1MRi5G7vjXr9PVWtiiCTM7xii7ov+RBjItub9BiM70yvolN6rngb4a9jszxWs5xfGPFHLtN4zhbGFJUCL6ajQAcgOQb7oL";
 
 // to retrieve secret from the secret manager, code is taken from https://us-east-1.console.aws.amazon.com/secretsmanager/home?region=us-east-1#!/secret?name=ProductionDB
 
@@ -107,6 +107,13 @@ app.post('/storestudent', async (req, res) => {
 })
 
 app.get('/liststudents',async (req, res) => {
+  connection = mysql.createConnection({
+    host     : 'database-b00884335-instance-1.cgnewppeezrp.us-east-1.rds.amazonaws.com',
+    port     : '3306',
+    user     :  JSON.parse(secret)['DBUsername'],
+    password :  JSON.parse(secret)['DBPassword']
+    
+  })
   
   connection.query('SELECT * FROM students.students', (err, rows) => {
     if (err) {
