@@ -62,21 +62,20 @@ client.getSecretValue({SecretId: secretName}, function(err, data) {
         // Decrypts secret using the associated KMS key.
         // Depending on whether the secret is a string or binary, one of these fields will be populated.
         if ('SecretString' in data) {
-            secret = JSON.parse(data.SecretString);
+            secret = data.SecretString;
             
         } else {
             let buff = new Buffer(data.SecretBinary, 'base64');
             decodedBinarySecret = buff.toString('ascii');
         }
     }
-    user=secret.DBUsername;
-    password=secret.DBPassword;
-   console.log(typeof secret.DBUsername);
+    
+   console.log(typeof secret);
     const connection = mysql.createConnection({
     host     : 'database-b00884335-instance-1.cgnewppeezrp.us-east-1.rds.amazonaws.com',
     port     : '3306',
-    user     :  secret?.DBUsername,
-    password :  secret?.DBUsername,
+    user     :  JSON.parse(secret)?.DBUsername,
+    password :  JSON.parse(secret)?.DBUsername,
     
   })
     
