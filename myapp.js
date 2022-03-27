@@ -73,8 +73,7 @@ app.use(bodyParser.json())
 
 
 var mysql = require('mysql');
-
-
+var connection;
 
  
 
