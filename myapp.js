@@ -74,24 +74,19 @@ app.use(bodyParser.json())
 
 var mysql = require('mysql');
 
-const connection = mysql.createConnection({
-  host     : 'database-b00884335-instance-1.cgnewppeezrp.us-east-1.rds.amazonaws.com',
-  port     : '3306',
-  user     :  JSON.parse(secret)['DBUsername'],
-  password :  JSON.parse(secret)['DBPassword'],
-  
-})
 
-connection.connect(err=>{
 
-  if(err){
-    console.log(err.message)
-    return;
-  }
-  console.log("connected")
-})
+ 
 
 app.post('/storestudent', async (req, res) => {
+  connection = mysql.createConnection({
+    host     : 'database-b00884335-instance-1.cgnewppeezrp.us-east-1.rds.amazonaws.com',
+    port     : '3306',
+    user     :  JSON.parse(secret)['DBUsername'],
+    password :  JSON.parse(secret)['DBPassword']
+    
+  })
+  
   console.log(req.body)
   let stmt = `INSERT INTO students.students(first_name,last_name,banner) VALUES ? `
   let values = []
